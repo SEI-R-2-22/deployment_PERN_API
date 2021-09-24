@@ -1,9 +1,9 @@
-# Pern App Cloud Deployment
+# PERN App Cloud Deployment
 
 ### Objectives
 
-- Deploy server to heroku
-- Deploy react app to Heroku
+- Deploy server to Heroku
+- Deploy React app to Heroku
 
 ## **Disclaimer**
 
@@ -11,7 +11,7 @@ This repo is set up assuming that your apps are stuctured the same way we've don
 
 ## Preparing Your Database Connection
 
-Open the `config/config.json` file for sequelize. Rename the file to `config.js`. And refactor it to a module exports like below:
+Open the `config/config.json` file for Sequelize. Rename the file to `config.js`. And refactor it to a module exports like below:
 
 ```js
 require('dotenv').config()
@@ -37,7 +37,7 @@ module.exports = {
 }
 ```
 
-In `models/index.js` we need to fix the require for the config, change the config require statement to the one below:
+In `models/index.js`, we need to fix the require for the config. Change the config require statement to the one below:
 
 ```js
 const config = require(__dirname + '/../config/config.js')[env]
@@ -57,7 +57,7 @@ Once your app is created, we need to add postgres as an addon:
 heroku addons:create heroku-postgresql:hobby-dev
 ```
 
-Next we'll add any `environment variables` for your project:
+Next we'll add any `environment variables` for your project (from your backend .env file):
 
 ```sh
 heroku config:set VARIABLE_NAME=<variable>
@@ -101,7 +101,7 @@ Make sure you have a `start` and `dev` script:
 }
 ```
 
-## Pointing Client To Our Api
+## Pointing Client To Our API
 
 In `client/src/globals/index.js`, modify your base url`:
 
@@ -125,13 +125,13 @@ You can now set up automatic deploys:
 
 Select `Enable Automatic Deploy` and make sure it's pointing to your `main` branch.
 
-Now in your project folder, `add`, `commit` and `push` your changes and a build should kick off on heroku!
+Now in your project folder, `add`, `commit` and `push` your changes and a build should kick off on Heroku!
 
-You can monitor progress in heroku's activity tab!
+You can monitor progress in Heroku's activity tab!
 
 Once the build is finished you can open your app by using the `Open App` button or `heroku open` in your terminal.
 
-You can also publish a build by adding and committing your changes and running `git push heroku main`
+You can also publish a build by adding and committing your changes and running `git push heroku main`.
 
 ## Monitoring Your Server
 
@@ -139,4 +139,4 @@ You can run `heroku logs --tail` to monitor what's happening with your server.
 
 ## Seeding Files
 
-If you have seeds that you want to run, you can ssh into your heroku server with `heroku run bash` and then running `npx sequelize-cli db:seed:all`.
+If you have seeds that you want to run, you can ssh into your Heroku server with `heroku run bash` and then running `npx sequelize-cli db:seed:all`.
