@@ -1,13 +1,9 @@
-# PERN App Cloud Deployment
+# PERN API Deployment
 
 ### Objectives
 
 - Deploy server to Heroku
-- Deploy React app to Heroku
 
-## **Disclaimer**
-
-This repo is set up assuming that your apps are stuctured the same way we've done them in class.
 
 ## Preparing Your Database Connection
 
@@ -65,31 +61,11 @@ heroku config:set VARIABLE_NAME=<variable>
 
 ### Wiring Up Our Code
 
-We now need to prep our code for deployment.
 
-In your `server.js`:
-
-- > Require path from `path`:
-  >
-  > ```js
-  > const path = require('path')
-  > ```
-
-- > Add the following **BELOW** your current middleware,and routes, **but before the listen method**:
-  >
-  > ```js
-  > if (process.env.NODE_ENV === 'production') {
-  >   app.use(express.static(path.join(__dirname, 'client/build')))
-  >   app.get('*', (req, res) => {
-  >     res.sendFile(path.join(`${__dirname}/client/build/index.html`))
-  >   })
-  > }
-  > ```
-
-Finally in your `package.json` for your **SERVER**, add a new script in your `scripts` section:
+In your `package.json`, add a new script in your `scripts` section:
 
 ```json
-    "build": "npm install && npx sequelize-cli db:migrate && cd client && rm -rf build && npm install && npm run build"
+    "build": "npm install && npx sequelize-cli db:migrate"
 ```
 
 Make sure you have a `start` and `dev` script:
@@ -101,37 +77,10 @@ Make sure you have a `start` and `dev` script:
 }
 ```
 
-## Pointing Client To Our API
-
-In `client/src/globals/index.js`, modify your base url`:
-
-```js
-process.env.NODE_ENV === 'production'
-  ? `${window.location.origin}/api`
-  : '<your local backend server>/api'
-```
 
 ## Deploying Our Project
 
-In your `Heroku` account select the deploy tab and select `connect to github`. If prompted to sign in go ahead and do so. You should now have a field to search repos:
-
-![Heroku-Github](images/heroku-github.png)
-
-Search For your project repo and click on `connect`.
-
-You can now set up automatic deploys:
-
-![Deploy](images/deploy.png)
-
-Select `Enable Automatic Deploy` and make sure it's pointing to your `main` branch.
-
-Now in your project folder, `add`, `commit` and `push` your changes and a build should kick off on Heroku!
-
-You can monitor progress in Heroku's activity tab!
-
-Once the build is finished you can open your app by using the `Open App` button or `heroku open` in your terminal.
-
-You can also publish a build by adding and committing your changes and running `git push heroku main`.
+Publish a build by adding and committing your changes and running `git push heroku main`.
 
 ## Monitoring Your Server
 
