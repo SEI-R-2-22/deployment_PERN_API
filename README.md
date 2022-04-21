@@ -42,7 +42,7 @@ const config = require(__dirname + '/../config/config.js')[env]
 In your project directory, run:
 
 ```sh
-heroku create
+heroku create <name of backend>
 ```
 
 Once your app is created, we need to add postgres as an addon:
