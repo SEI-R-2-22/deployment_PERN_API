@@ -87,5 +87,3 @@ You can run `heroku logs --tail` to monitor what's happening with your server.
 ## Seeding Files
 
 If you have seeds that you want to run, you can ssh into your Heroku server with `heroku run bash` and then running `npx sequelize-cli db:seed:all`.
-=======
-
